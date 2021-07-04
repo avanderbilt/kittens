@@ -87,6 +87,10 @@ db.once('open', async () => {
   // **************************************************************************
   
   Kitten.find({}, { '_id': 0, 'name': 1 }, (error, kittens) => {
+    if (error) {
+      console.log(error.message);
+      process.exit(1);
+    }
     console.log(kittens);
     db.close();
   });
