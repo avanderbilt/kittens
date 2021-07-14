@@ -5,7 +5,7 @@
   },
   "logo": {
     "src": "https://raw.githubusercontent.com/avanderbilt/kittens/master/doc/cats.jpg",
-    "width": "150"
+    "width": "300"
   },
   "documentationConfig": {
     "format": "md",
