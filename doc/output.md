@@ -1,3 +1,3 @@
 ## Output
 
-![Program Output](./doc/output.png)
+![Program Output](output.png)
