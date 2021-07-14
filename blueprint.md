@@ -5,5 +5,6 @@
 {{ load:doc/background.md }}
 {{ load:doc/output.md }}
 {{ doc:app/kittyModel.js }}
+{{ doc:app/kittyModel.js }}
 {{ load:doc/references.md }}
 {{ template:license }}

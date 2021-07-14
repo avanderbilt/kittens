@@ -41,6 +41,7 @@ console.log(chalk`Connected to {bold ${dbc.name}} on {bold ${dbc.host}}, port {b
 ![Program Output](/doc/output.png)
 
 
+
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#references)
 
 ## ➤ References
