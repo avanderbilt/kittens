@@ -4,7 +4,7 @@
     "github": "avanderbilt/kittens"
   },
   "logo": {
-    "src": "/doc/cats/jpg",
+    "src": "https://raw.githubusercontent.com/avanderbilt/kittens/master/doc/cats.jpg",
     "width": "150"
   },
   "documentationConfig": {
