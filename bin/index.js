@@ -1,3 +1,6 @@
+/**
+ * Will this show up in jsdoc?
+ */
 (async () => {
 
     /**

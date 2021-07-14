@@ -1,4 +1,4 @@
-### Background
+## Background
 
 This project is mostly my implementation of the example code from the [Mongoose](https://mongoosejs.com/) [Getting Started](https://mongoosejs.com/docs/) tutorial. I added a lot of notes and links to things so that I could use this project as a reference and launchpad to improve my [MongoDB](https://www.mongodb.com/) skills.
 

@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon .",
     "readme": "readme generate",
-    "trace": "nodemon --trace-warnings ."
+    "trace": "nodemon --trace-warnings .",
+    "doc": "jsdoc --configure ./jsdoc.json --recurse --readme ./README.md --package ./package.json ."
   },
   "keywords": [],
   "author": "",

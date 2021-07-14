@@ -6,7 +6,18 @@
 
 <br />
 
-### Background
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#table-of-contents)
+
+## ➤ Table of Contents
+
+* [➤ Background](#-background)
+* [➤ References](#-references)
+* [➤ License](#-license)
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#background)
+
+## ➤ Background
 
 This project is mostly my implementation of the example code from the [Mongoose](https://mongoosejs.com/) [Getting Started](https://mongoosejs.com/docs/) tutorial. I added a lot of notes and links to things so that I could use this project as a reference and launchpad to improve my [MongoDB](https://www.mongodb.com/) skills.
 
@@ -18,7 +29,10 @@ This project makes use of [chalk](https://github.com/chalk/chalk), mostly in the
 console.log(chalk`Connected to {bold ${dbc.name}} on {bold ${dbc.host}}, port {bold ${dbc.port}}.`);
 ```
 
-### References
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#references)
+
+## ➤ References
 
 - [Mongoose v5.13.2: Getting Started](https://mongoosejs.com/docs/)
 - [Mongoose ODM v5.13.2](https://mongoosejs.com/)
