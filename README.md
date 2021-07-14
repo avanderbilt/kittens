@@ -12,6 +12,7 @@
 ## ➤ Table of Contents
 
 * [➤ Background](#-background)
+* [➤ Output](#-output)
 * [➤ References](#-references)
 * [➤ License](#-license)
 
@@ -29,6 +30,12 @@ This project makes use of [chalk](https://github.com/chalk/chalk), mostly in the
 console.log(chalk`Connected to {bold ${dbc.name}} on {bold ${dbc.host}}, port {bold ${dbc.port}}.`);
 ```
 
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#output)
+
+## ➤ Output
+
+![Program Output](./output.png)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#references)
 
