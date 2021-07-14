@@ -1,0 +1,13 @@
+{
+  "line": "rainbow",
+  "ids": {
+    "github": "avanderbilt/kittens"
+  },
+  "documentationConfig": {
+    "format": "md",
+    "debug": false,
+    "markdown": {
+      "titleLevel": 3
+    }
+  }
+}

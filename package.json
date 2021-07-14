@@ -1,21 +1,27 @@
 {
   "name": "kittens",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This project was created to house my experiments with the \"Mongoose v5.13.2: Getting Started\" tutorial code.",
+  "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index"
+    "dev": "nodemon .",
+    "readme": "readme generate",
+    "trace": "nodemon --trace-warnings ."
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {
     "chalk": "^4.1.1",
     "empress": "^0.0.2",
     "mongoose": "^5.13.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.9"
+    "@appnest/readme": "^1.2.7",
+    "nodemon": "^2.0.12"
+  },
+  "bin": {
+    "kitties": "./bin/index.js"
   }
 }

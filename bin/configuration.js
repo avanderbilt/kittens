@@ -2,7 +2,7 @@ const configuration = {
   db: {
     host: 'localhost',
     port: 27017,
-    name: 'mydatabase'
+    name: 'cats'
   }
 };
 module.exports = configuration;
