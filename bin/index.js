@@ -12,6 +12,42 @@
         const chalk = require('chalk'); // §202107041507
         const dbc = require('./configuration').db;
         const kittyController = require('../app/kittyController');
+        const db = mongoose.connection;
+
+        // **************************************************************************
+        // Set up event handlers ...
+        // **************************************************************************
+
+        /**
+         * `error`: Emitted if an error occurs on a connection, like a
+         * `parseError` due to malformed data or a payload larger than 16MB.
+         * See: https://mongoosejs.com/docs/connections.html#connection-events
+         */
+        db.on('error', console.error.bind(console, 'Connection error:'));
+
+        /**
+         * `close`: Emitted after `Connection#close()` successfully closes the
+         * connection. If you call `conn.close()`, you'll get both a
+         * 'disconnected' event and a 'close' event.
+         * See: https://mongoosejs.com/docs/connections.html#connection-events
+         */
+        db.on('close', () => {
+            console.log(chalk.gray(`\nClosed the ${chalk.bold(dbc.name)} database.\n`));
+        });
+
+        /**
+         * `connected`: Emitted when Mongoose successfully makes its initial
+         * connection to the MongoDB server, or when Mongoose reconnects after
+         * losing connectivity.
+         * `open`: Equivalent to `connected`.
+         */
+        db.once('open', async () => {
+            await kittyController.buildKittens();
+            await kittyController.printKitties();
+            await kittyController.speak();
+            await kittyController.clearKitties();
+            await db.close();
+        });
 
         // **************************************************************************
         // Initialize the connection ...
@@ -39,53 +75,12 @@
          * See: https://mongoosejs.com/docs/connections.html#options
          */
 
-
-        const db = mongoose.connection;
-
-        console.log(chalk.gray(chalk`\nConnected to {bold ${dbc.name}} on {bold ${dbc.host}}, port {bold ${dbc.port}}.`));
-
-        /**
-         * `error`: Emitted if an error occurs on a connection, like a
-         * `parseError` due to malformed data or a payload larger than 16MB.
-         * See: https://mongoosejs.com/docs/connections.html#connection-events
-         */
-
-        db.on('error', console.error.bind(console, 'Connection error:'));
-
-        db.on('close', () => {
-            console.log(chalk.gray(`\nClosed the ${chalk.bold(dbc.name)} database.\n`));
-        });
-
-        /* https://mongoosejs.com/docs/connections.html#connection-events
-        connected: Emitted when Mongoose successfully makes its initial connection to
-        the MongoDB server, or when Mongoose reconnects after losing connectivity.
-        open: Equivalent to connected */
-
-        /* https://mongoosejs.com/docs/connections.html#connection-events
-        `error`: Emitted if an error occurs on a connection, like a parseError due to malformed data or a payload larger than 16MB. */
-
-        // `close`: Emitted after Connection#close() successfully closes the connection. If you call conn.close(), you'll get both a 'disconnected' event and a 'close' event.
-
-        /* https://mongoosejs.com/docs/connections.html#connection-events
-        open: Equivalent to connected
-        connected: Emitted when Mongoose successfully makes its initial connection to
-        the MongoDB server, or when Mongoose reconnects after losing connectivity.
-        open: Equivalent to connected */
-        // https://nodejs.org/api/events.html#events_handling_events_only_once
-        // Using the eventEmitter.once() method, it is possible to register a listener that is called at most once for a particular event. Once the event is emitted, the listener is unregistered and then called.
-
-        db.once('open', async () => {
-            await kittyController.buildKittens();
-            await kittyController.printKitties();
-            await kittyController.speak();
-            await kittyController.clearKitties();
-            await db.close();
-        });
-
         await mongoose.connect(`mongodb://${dbc.host}:${dbc.port}/${dbc.name}`, { // §202107041049
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
+
+        console.log(chalk.gray(chalk`\nConnected to {bold ${dbc.name}} on {bold ${dbc.host}}, port {bold ${dbc.port}}.`));
     } catch (error) {
         console.error(error.message);
     }
