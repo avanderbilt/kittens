@@ -3,6 +3,10 @@
   "ids": {
     "github": "avanderbilt/kittens"
   },
+  "logo": {
+    "src": "/doc/cats/jpg",
+    "width": "150"
+  },
   "documentationConfig": {
     "format": "md",
     "debug": false,

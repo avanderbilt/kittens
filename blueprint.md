@@ -1,4 +1,5 @@
 {{ template:title }}
+{{ template:logo }}
 {{ template:description }}
 {{ template:toc }}
 {{ load:doc/background.md }}
