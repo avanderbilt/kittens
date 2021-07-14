@@ -77,12 +77,6 @@
 
         // `close`: Emitted after Connection#close() successfully closes the connection. If you call conn.close(), you'll get both a 'disconnected' event and a 'close' event.
 
-        db.on('error', console.error.bind(console, 'Connection error:'));
-
-        db.on('close', () => {
-            console.log(`Closed the ${chalk.bold(dbc.name)} database.`);
-        });
-
         /* https://mongoosejs.com/docs/connections.html#connection-events
         open: Equivalent to connected
         connected: Emitted when Mongoose successfully makes its initial connection to
