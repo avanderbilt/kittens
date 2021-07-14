@@ -1,6 +1,3 @@
-/**
- * Will this show up in jsdoc?
- */
 (async () => {
 
     /**
@@ -42,18 +39,10 @@
          * See: https://mongoosejs.com/docs/connections.html#options
          */
 
-        const connectionString = `mongodb://${dbc.host}:${dbc.port}/${dbc.name}`;
-
-        mongoose.connect(connectionString, { // §202107041049
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }).then(() => {
-            db.dropDatabase();
-        });
 
         const db = mongoose.connection;
 
-        console.log(chalk`Connected to {bold ${dbc.name}} on {bold ${dbc.host}}, port {bold ${dbc.port}}.`);
+        console.log(chalk.gray(chalk`\nConnected to {bold ${dbc.name}} on {bold ${dbc.host}}, port {bold ${dbc.port}}.`));
 
         /**
          * `error`: Emitted if an error occurs on a connection, like a
@@ -61,10 +50,10 @@
          * See: https://mongoosejs.com/docs/connections.html#connection-events
          */
 
-        mongoose.connection.on('error', console.error.bind(console, 'Connection error:'));
+        db.on('error', console.error.bind(console, 'Connection error:'));
 
-        mongoose.connection.on('close', () => {
-            console.log(`Closed the ${chalk.bold(dbc.name)} database.`);
+        db.on('close', () => {
+            console.log(chalk.gray(`\nClosed the ${chalk.bold(dbc.name)} database.\n`));
         });
 
         /* https://mongoosejs.com/docs/connections.html#connection-events
@@ -88,7 +77,14 @@
         db.once('open', async () => {
             await kittyController.buildKittens();
             await kittyController.printKitties();
+            await kittyController.speak();
+            await kittyController.clearKitties();
             await db.close();
+        });
+
+        await mongoose.connect(`mongodb://${dbc.host}:${dbc.port}/${dbc.name}`, { // §202107041049
+            useNewUrlParser: true,
+            useUnifiedTopology: true
         });
     } catch (error) {
         console.error(error.message);
