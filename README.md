@@ -6,7 +6,6 @@
 
 <br />
 
-
 ### Background
 
 This project is mostly my implementation of the example code from the [Mongoose](https://mongoosejs.com/) [Getting Started](https://mongoosejs.com/docs/) tutorial. I added a lot of notes and links to things so that I could use this project as a reference and launchpad to improve my [MongoDB](https://www.mongodb.com/) skills.
@@ -17,26 +16,6 @@ This project makes use of [chalk](https://github.com/chalk/chalk), mostly in the
 
 ```javascript
 console.log(chalk`Connected to {bold ${dbc.name}} on {bold ${dbc.host}}, port {bold ${dbc.port}}.`);
-```
-
-
-### What's Going On
-
-```mermaid
-classDiagram
-Class01 <|-- AveryLongClass : Cool
-Class03 *-- Class04
-Class05 o-- Class06
-Class07 .. Class08
-Class09 --> C2 : Where am i?
-Class09 --* C3
-Class09 --|> Class07
-Class07 : equals()
-Class07 : Object[] elementData
-Class01 : size()
-Class01 : int chimp
-Class01 : int gorilla
-Class08 <--> C2: Cool label
 ```
 
 ### References
