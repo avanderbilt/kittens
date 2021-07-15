@@ -1,7 +1,7 @@
 {
-  "name": "kittens",
+  "name": "node_template",
   "version": "1.0.0",
-  "description": "This project was created to house my experiments with the \"Mongoose v5.13.2: Getting Started\" tutorial code.",
+  "description": "This is my Node.js template project.",
   "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,16 +13,12 @@
   "keywords": [],
   "author": "",
   "license": "GPL-3.0",
-  "dependencies": {
-    "chalk": "^4.1.1",
-    "empress": "^0.0.2",
-    "mongoose": "^5.13.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@appnest/readme": "^1.2.7",
     "nodemon": "^2.0.12"
   },
   "bin": {
-    "kitties": "./bin/index.js"
+    "node_template": "./bin/index.js"
   }
 }
