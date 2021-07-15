@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 const chalk = require('chalk');
 
-// ****************************************************************************
-// Create the schema and add a function to the prototype.
-// ****************************************************************************
-
 /**
  * The schema for kitties in the database.
  * @type {mongoose.Schema}
@@ -23,8 +19,8 @@ kittySchema.methods.speak = function () {
   console.log(greeting);
 }
 
-// ****************************************************************************
-// Create and export the model.
-// ****************************************************************************
-
+/**
+ * Create and export the model.
+ * @type {Model}
+ */
 module.exports = mongoose.model('Kitten', kittySchema);

@@ -4,13 +4,7 @@ const Kitten = require('./kittyModel');
  * Build and save a sweet, sweet database of kitties.
  * @returns {Promise<void>}
  */
-exports.buildKittens = async () => {
-
-  // Test Kitties
-  // const noName = new Kitten();
-  // noName.speak(); // Meow don't have a name!
-  // const fluffy = new Kitten({name: 'Fluffy'});
-
+exports.buildKitties = async () => {
   const mindy = new Kitten({name: 'Mindy'});
   const verbal = new Kitten({name: 'Verbal'});
   const leander = new Kitten({name: 'Leander'});
@@ -21,13 +15,12 @@ exports.buildKittens = async () => {
   await leander.save();
   await hazle.save();
 
-  const moreKitties = [];
-  moreKitties.push(new Kitten({name: 'Fred'}));
-  moreKitties.push(new Kitten({name: 'Wilma'}));
+  const moreKitties = [
+    new Kitten({name: 'Fred'}),
+    new Kitten({name: 'Wilma'})
+  ];
 
   await Kitten.create(moreKitties);
-
-  // TODO: Figure out how to save a bunch of kitties together.
 }
 
 /**

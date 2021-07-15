@@ -42,7 +42,7 @@
          * `open`: Equivalent to `connected`.
          */
         db.once('open', async () => {
-            await kittyController.buildKittens();
+            await kittyController.buildKitties();
             await kittyController.printKitties();
             await kittyController.speak();
             await kittyController.clearKitties();
