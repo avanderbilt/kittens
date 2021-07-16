@@ -6,3 +6,4 @@
 - [Zettelkasten](https://en.wikipedia.org/wiki/Zettelkasten)
 - [chalk/chalk: 🖍 Terminal string styling done right](https://github.com/chalk/chalk)
 - [Exploring ES6 — 8. Template literals](https://exploringjs.com/es6/ch_template-literals.html#_tagged-template-literals)
+- [Jest · 🃏 Delightful JavaScript Testing](https://jestjs.io/)
