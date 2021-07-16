@@ -4,6 +4,7 @@
   "description": "This project was created to house my experiments with the \"Mongoose v5.13.2: Getting Started\" tutorial code.",
   "main": "bin/index.js",
   "scripts": {
+    "testoh": "jest --detectOpenHandles",
     "test": "jest",
     "dev": "nodemon .",
     "readme": "readme generate",

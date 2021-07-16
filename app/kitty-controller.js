@@ -1,10 +1,13 @@
-const Kitten = require('./kitty-model');
+const Kitty = require('./kitty-model').Kitten;
 
 exports.buildKitty = async (name) => {
   try {
-    await new Kitten({
-      name: name
-    }).save();
+    const kitty = new Kitty({name: 'Mindy'});
+
+    await kitty.save();
+
+    return kitty;
+
   } catch (e) {
     throw e;
   }
@@ -13,11 +16,12 @@ exports.buildKitty = async (name) => {
 exports.buildKitties = async (names) => {
   try {
     const kitties = names.map(name => {
-      return new Kitten({
+      return new Kitty({
         name: name
       });
     });
-    await Kitten.create(kitties);
+    await Kitty.create(kitties);
+    return kitties;
   } catch (e) {
     throw e;
   }
@@ -27,7 +31,7 @@ exports.getKitty = async (name) => {
   let data = null;
 
   try {
-    data = await Kitten.find({
+    data = await Kitty.find({
       'name': name
     }, {
       '_id': 0,
@@ -37,11 +41,16 @@ exports.getKitty = async (name) => {
     throw e;
   }
 
-  if (data.length !== 1) {
+  if (data.length === 0) {
+    console.warn(`There were no kitties named ${name}!`);
+    return null;
+  }
+
+  if (data.length > 1) {
     throw new Error(`There were too many kitties named ${name}!`);
   }
+
   const kitty = data[0];
-  console.log(kitty);
   return kitty;
 }
 
@@ -52,7 +61,7 @@ exports.getKitty = async (name) => {
 exports.printKitties = async () => {
   try {
     const chalk = require('chalk');
-    const data = await Kitten.find({}, {
+    const data = await Kitty.find({}, {
       '_id': 0,
       'name': 1
     });
@@ -76,7 +85,7 @@ exports.printKitties = async () => {
  */
 exports.clearKitties = async () => {
   try {
-    await Kitten.deleteMany({});
+    await Kitty.deleteMany({});
   } catch (e) {
     throw e;
   }
@@ -86,6 +95,7 @@ exports.clearKitties = async () => {
  * Allow each kitty an opportunity to speak.
  * @returns {Promise<void>}
  */
+/*
 exports.speak = async () => {
   try {
     const chalk = require('chalk');
@@ -101,3 +111,4 @@ exports.speak = async () => {
     throw e;
   }
 }
+ */

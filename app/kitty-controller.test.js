@@ -1,39 +1,74 @@
+const controller = require('./kitty-controller');
 const mongoose = require('mongoose');
-const dbc = require('../bin/configuration').db;
-const kittyController = require('./kitty-controller');
+const Kitty = require('./kitty-model').Kitten;
 
+test('Ensure a single kitty may be created.', async () => {
+  try {
+    const name = 'Mindy';
+    const kitty = await controller.buildKitty(name);
 
-test('Get the expected kitty back.', async () => {
+    console.log(kitty);
+
+    expect(kitty.name).toBe(name);
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+test('Ensure that a single kitty may be retrieved by name.', async () => {
+
+  /**
+   * This assumes that kitty names are unique, which is supported by the code,
+   * not the database in this case.
+   */
 
   try {
 
-    const db = mongoose.connection;
+    /**
+     * Build the kitty to retrieve.
+     */
 
-    db.on('error', console.error.bind(console, 'Connection error:'));
-    db.on('close', () => {
-      console.log(chalk.gray(`\nClosed the ${chalk.bold(dbc.name)} database.\n`));
-    });
+    const name = 'Mindy';
+    await controller.buildKitty(name);
 
-    const kittyName = 'Mindy';
-    let kitty = null;
+    /**
+     * Retrieve the kitty.
+     */
 
-    db.once('open', async () => {
-      await kittyController.buildKitty(name);
-      kitty = await kittyController.getKitty(name)
-      await kittyController.clearKitties();
-      await db.close();
-    });
+    const retrievedKitty = await controller.getKitty(name);
 
-    await mongoose.connect(`mongodb://${dbc.host}:${dbc.port}/${dbc.name}`, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    console.log(retrievedKitty);
 
-    console.log(chalk.gray(chalk`\nConnected to {bold ${dbc.name}} on {bold ${dbc.host}}, port {bold ${dbc.port}}.`));
+    expect(retrievedKitty).toBeTruthy();
+    expect(retrievedKitty.name).toBe(name);
 
-    expect(kitty.name).toBe(kittyName);
+    const noKitty = await controller.getKitty('Ghost');
 
-  } catch (error) {
-    console.error(error.message);
+    expect(noKitty).toBeNull();
+
+  } catch (e) {
+    console.error(e);
   }
+});
+
+test('Ensure that multiple kitties may be created.', async () => {
+  try {
+    const kittyNames = ['Leander', 'Verbal'];
+
+    const kitties = await controller.buildKitties(kittyNames);
+
+    console.log(`Expecting kitties.length (${kitties.length}) to be kittyNames.length (${kittyNames.length}).`);
+
+    expect(kitties.length).toBe(kittyNames.length);
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+afterEach(async () => {
+  await Kitty.deleteMany({});
+});
+
+afterAll(async () => {
+  await mongoose.connection.close();
 });
