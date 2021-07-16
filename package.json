@@ -4,7 +4,7 @@
   "description": "This project was created to house my experiments with the \"Mongoose v5.13.2: Getting Started\" tutorial code.",
   "main": "bin/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon .",
     "readme": "readme generate",
     "trace": "nodemon --trace-warnings .",
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@appnest/readme": "^1.2.7",
+    "jest": "^27.0.6",
     "nodemon": "^2.0.12"
   },
   "bin": {
