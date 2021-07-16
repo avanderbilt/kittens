@@ -6,6 +6,7 @@
   "scripts": {
     "testoh": "jest --detectOpenHandles",
     "test": "jest",
+    "testw": "jest --silent --watch",
     "dev": "nodemon .",
     "readme": "readme generate",
     "trace": "nodemon --trace-warnings .",

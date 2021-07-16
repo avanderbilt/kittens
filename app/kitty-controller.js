@@ -4,10 +4,16 @@ exports.buildKitty = async (name) => {
   try {
     const kitty = new Kitty({name: 'Mindy'});
 
+    const existingKitty = await this.getKitty(name);
+
+    if (existingKitty) {
+      console.error(`There is already a kitty named ${name}!`);
+      return null;
+    }
+
     await kitty.save();
 
-    return kitty;
-
+    return await this.getKitty(name);
   } catch (e) {
     throw e;
   }
@@ -21,10 +27,30 @@ exports.buildKitties = async (names) => {
       });
     });
     await Kitty.create(kitties);
-    return kitties;
+
+    return await this.getKitties(names);
   } catch (e) {
     throw e;
   }
+}
+
+exports.getKitties = async (names) => {
+  let kitties = null;
+
+  try {
+    kitties = await Kitty.find({
+      'name': { '$in': names }
+    });
+  } catch (e) {
+    throw e;
+  }
+
+  if (kitties.length === 0) {
+    console.warn(`There were no kitties with these names: ${names}!`);
+    return null;
+  }
+
+  return kitties;
 }
 
 exports.getKitty = async (name) => {
