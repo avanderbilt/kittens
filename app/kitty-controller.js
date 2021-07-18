@@ -2,17 +2,13 @@ const Kitty = require('./kitty-model').Kitten;
 
 exports.buildKitty = async (name) => {
   try {
-    const kitty = new Kitty({name: 'Mindy'});
-
+    const kitty = new Kitty({name: name});
     const existingKitty = await this.getKitty(name);
-
     if (existingKitty) {
       console.error(`There is already a kitty named ${name}!`);
       return null;
     }
-
     await kitty.save();
-
     return await this.getKitty(name);
   } catch (e) {
     throw e;
@@ -36,7 +32,6 @@ exports.buildKitties = async (names) => {
 
 exports.getKitties = async (names) => {
   let kitties = null;
-
   try {
     kitties = await Kitty.find({
       'name': { '$in': names }
@@ -44,18 +39,15 @@ exports.getKitties = async (names) => {
   } catch (e) {
     throw e;
   }
-
   if (kitties.length === 0) {
     console.warn(`There were no kitties with these names: ${names}!`);
     return null;
   }
-
   return kitties;
 }
 
 exports.getKitty = async (name) => {
   let data = null;
-
   try {
     data = await Kitty.find({
       'name': name
@@ -66,16 +58,13 @@ exports.getKitty = async (name) => {
   } catch (e) {
     throw e;
   }
-
   if (data.length === 0) {
     console.warn(`There were no kitties named ${name}!`);
     return null;
   }
-
   if (data.length > 1) {
     throw new Error(`There were too many kitties named ${name}!`);
   }
-
   const kitty = data[0];
   return kitty;
 }
@@ -91,9 +80,7 @@ exports.printKitties = async () => {
       '_id': 0,
       'name': 1
     });
-
     if (data && data.length !== 0) {
-
       const kitties = data.map((element) => {
         return element.name;
       });
@@ -121,7 +108,6 @@ exports.clearKitties = async () => {
  * Allow each kitty an opportunity to speak.
  * @returns {Promise<void>}
  */
-/*
 exports.speak = async () => {
   try {
     const chalk = require('chalk');
@@ -137,4 +123,3 @@ exports.speak = async () => {
     throw e;
   }
 }
- */

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const chalk = require('chalk');
+const mongoose = require('mongoose'); // §202107041019
+const chalk = require('chalk'); // §202107041507
 const dbc = require('../bin/configuration').db;
 
 /**
@@ -13,14 +13,12 @@ exports.KittySchema = new mongoose.Schema({
 /**
  * Cause a kitty to speak.
  */
-/*
-this.KittySchema.methods.speak = function () {
+this.KittySchema.methods.speak = () => {
   const greeting = this.name ?
     `Hi, meow name is ${chalk.yellow(this.name)}.` :
     chalk.red('Meow don\'t have a name!');
   console.log(greeting);
 }
- */
 
 (async () => {
   try {
