@@ -5,7 +5,7 @@ exports.buildKitty = async (name) => {
     const kitty = new Kitty({name: name});
     const existingKitty = await this.getKitty(name);
     if (existingKitty) {
-      console.error(`There is already a kitty named ${name}!`);
+      console.warn(`There is already a kitty named ${name}!`);
       return null;
     }
     await kitty.save();
@@ -17,12 +17,35 @@ exports.buildKitty = async (name) => {
 
 exports.buildKitties = async (names) => {
   try {
-    const kitties = names.map(name => {
-      return new Kitty({
-        name: name
+    const existingKitties = await this.getKitties(names);
+
+    let kittiesToSaveNames = names;
+
+    if (existingKitties && existingKitties.length > 0) {
+      kittiesToSaveNames = [];
+
+      const existingKittyNames = existingKitties.map(kitty => {
+        return kitty.name;
       });
+
+      for (let i = 0; i < names.length; i++) {
+        if (existingKittyNames.includes(names[i])) {
+          console.warn(`There is already a kitty named ${names[i]}!`);
+        } else {
+          kittiesToSaveNames.push(names[i]);
+        }
+      }
+    }
+
+    if (!kittiesToSaveNames || kittiesToSaveNames.length === 0) {
+      return null;
+    }
+
+    const kittiesToSave = kittiesToSaveNames.map(name => {
+      return new Kitty({name: name});
     });
-    await Kitty.create(kitties);
+
+    await Kitty.create(kittiesToSave);
 
     return await this.getKitties(names);
   } catch (e) {
@@ -34,7 +57,7 @@ exports.getKitties = async (names) => {
   let kitties = null;
   try {
     kitties = await Kitty.find({
-      'name': { '$in': names }
+      'name': {'$in': names}
     });
   } catch (e) {
     throw e;
@@ -65,8 +88,7 @@ exports.getKitty = async (name) => {
   if (data.length > 1) {
     throw new Error(`There were too many kitties named ${name}!`);
   }
-  const kitty = data[0];
-  return kitty;
+  return data[0];
 }
 
 /**
@@ -111,7 +133,7 @@ exports.clearKitties = async () => {
 exports.speak = async () => {
   try {
     const chalk = require('chalk');
-    const kitties = await Kitten.find({}, {
+    const kitties = await Kitty.find({}, {
       '_id': 0,
       'name': 1
     });

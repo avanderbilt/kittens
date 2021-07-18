@@ -80,6 +80,20 @@ describe('Kitty Controller Module', () => {
     }
   });
 
+  it('Ensure that multiple kitties may be created, even if some kitties already exist with the same name.', async () => {
+    try {
+      const doubleKittyNames = ['Mindy', 'Pepper'];
+      const singleKittyNames = ['Leander', 'Verbal'];
+      const allKittyNames = doubleKittyNames.concat(singleKittyNames);
+      let kitties = await controller.buildKitties(doubleKittyNames);
+      expect(kitties.length).toBe(doubleKittyNames.length);
+      kitties =  await controller.buildKitties(allKittyNames);
+      expect(kitties.length).toBe(allKittyNames.length);
+    } catch (e) {
+      console.error(e);
+    }
+  });
+
   afterEach(async () => {
     await Kitty.deleteMany({});
   });
