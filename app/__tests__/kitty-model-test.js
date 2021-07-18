@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const kittyModel = require('../kitty-model');
 const Kitty = kittyModel.Kitten;
 
@@ -12,5 +13,9 @@ describe('Kitty Model Module', () => {
     } catch (e) {
       console.error(e);
     }
+  });
+
+  afterAll(async () => {
+    await mongoose.connection.close();
   });
 });
